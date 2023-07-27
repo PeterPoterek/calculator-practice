@@ -6,9 +6,15 @@ import NumberButtons from "./Components/NumberButtons";
 export const AppContext = createContext();
 function App() {
   const [currentNum, setCurrentNum] = useState("");
+  const [currentOperator, setCurrentOperator] = useState("");
 
   const clear = () => {
     setCurrentNum(0);
+  };
+
+  const handleOperator = (operator) => {
+    setCurrentOperator(operator);
+    console.log(currentOperator);
   };
   return (
     <>
@@ -17,10 +23,10 @@ function App() {
         <div className="wrapper">
           <NumberButtons />
           <div className="container-operator">
-            <button>+</button>
-            <button>-</button>
-            <button>*</button>
-            <button>/</button>
+            <button onClick={() => handleOperator("+")}>+</button>
+            <button onClick={() => handleOperator("-")}>-</button>
+            <button onClick={() => handleOperator("*")}>*</button>
+            <button onClick={() => handleOperator("/")}>/</button>
           </div>
         </div>
         <button>=</button>
