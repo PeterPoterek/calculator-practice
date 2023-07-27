@@ -8,18 +8,51 @@ function App() {
   const [currentNum, setCurrentNum] = useState("");
   const [currentOperator, setCurrentOperator] = useState("");
 
+  const [prevNumber, setPrevNumber] = useState("");
+  const [result, setResult] = useState("");
   const clear = () => {
-    setCurrentNum(0);
+    setCurrentNum("");
+    setPrevNumber("");
+    setResult("");
   };
 
   const handleOperator = (operator) => {
     setCurrentOperator(operator);
+    setPrevNumber(currentNum);
+    setCurrentNum("");
     console.log(currentOperator);
+  };
+
+  const calculate = () => {
+    let num1 = Number(currentNum);
+    let num2 = Number(prevNumber);
+    let result = 0;
+    if (currentOperator === "+") {
+      result = num1 + num2;
+    }
+    if (currentOperator === "-") {
+      result = num1 - num2;
+    }
+    if (currentOperator === "*") {
+      result = num1 * num2;
+    }
+    if (currentOperator === "/") {
+      result = num1 / num2;
+    }
+
+    setCurrentNum("");
+    setPrevNumber("");
+    setCurrentOperator("");
+    setResult(result);
+    console.log(result);
   };
   return (
     <>
       <AppContext.Provider value={{ currentNum, setCurrentNum }}>
-        <h1>{currentNum}</h1>
+        <span>{prevNumber}</span>
+        <span>{currentOperator}</span>
+        <span>{currentNum} </span>
+        <span>{result}</span>
         <div className="wrapper">
           <NumberButtons />
           <div className="container-operator">
@@ -29,8 +62,8 @@ function App() {
             <button onClick={() => handleOperator("/")}>/</button>
           </div>
         </div>
-        <button>=</button>
         <button onClick={clear}>Clear</button>
+        <button onClick={calculate}>=</button>
       </AppContext.Provider>
     </>
   );
