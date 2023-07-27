@@ -40,3 +40,21 @@
 .read-the-docs {
   color: #888;
 }
+
+.wrapper {
+  display: flex;
+}
+.container-num {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-width: 200px;
+}
+.container-operator {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1px;
+}
