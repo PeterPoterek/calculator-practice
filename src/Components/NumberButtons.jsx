@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AppContext } from "../App";
 const NumberButtons = () => {
   const { setCurrentNum } = useContext(AppContext);
@@ -6,6 +6,21 @@ const NumberButtons = () => {
   const handleNumClick = (num) => {
     setCurrentNum((prevInput) => prevInput + num);
   };
+
+  const handleKeyDown = (event) => {
+    const key = event.key;
+    if (/[1-9]/.test(key)) {
+      handleNumClick(key);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
   return (
     <div className="container-num">
       <button onClick={() => handleNumClick("1")}>1</button>
