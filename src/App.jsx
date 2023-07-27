@@ -66,11 +66,9 @@ function App() {
         <span>{currentOperator}</span>
         <span>{currentNum} </span>
         <div className="wrapper">
-          <NumberButtons />
-          <Operators />
+          <NumberButtons clear={clear} />
+          <Operators calculate={calculate} />
         </div>
-        <button onClick={clear}>Clear</button>
-        <button onClick={calculate}>=</button>
       </AppContext.Provider>
     </>
   );

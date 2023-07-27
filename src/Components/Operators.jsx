@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "../App";
 
-const Operators = () => {
+const Operators = (props) => {
   const { currentNum, prevNumber, setPrevNumber, currentOperator, setCurrentOperator, clearUI } = useContext(AppContext);
   const handleOperator = (operator) => {
     if (currentOperator === operator) return;
@@ -19,6 +19,7 @@ const Operators = () => {
       <button onClick={() => handleOperator("-")}>-</button>
       <button onClick={() => handleOperator("*")}>*</button>
       <button onClick={() => handleOperator("/")}>/</button>
+      <button onClick={props.calculate}>=</button>
     </div>
   );
 };

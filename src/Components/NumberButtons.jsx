@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { AppContext } from "../App";
-const NumberButtons = () => {
+const NumberButtons = (props) => {
   const { setCurrentNum } = useContext(AppContext);
 
   const handleNumClick = (num) => {
@@ -33,6 +33,7 @@ const NumberButtons = () => {
       <button onClick={() => handleNumClick("8")}>8</button>
       <button onClick={() => handleNumClick("9")}>9</button>
       <button onClick={() => handleNumClick("0")}>0</button>
+      <button onClick={props.clear}>Clear</button>
     </div>
   );
 };
