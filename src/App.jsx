@@ -2,6 +2,7 @@ import { useState, createContext } from "react";
 
 import "./App.css";
 import NumberButtons from "./Components/NumberButtons";
+import Operators from "./Components/Operators";
 
 export const AppContext = createContext();
 function App() {
@@ -31,14 +32,6 @@ function App() {
     clearUI(true, true, true, true);
   };
 
-  const handleOperator = (operator) => {
-    setCurrentOperator(operator);
-    setPrevNumber(currentNum);
-    clearUI(true, false, false, false);
-
-    console.log(currentOperator);
-  };
-
   const calculate = () => {
     let num1 = Number(currentNum);
     let num2 = Number(prevNumber);
@@ -53,7 +46,7 @@ function App() {
       result = num1 * num2;
     }
     if (currentOperator === "/") {
-      result = num1 / num2;
+      result = num2 / num1;
     }
 
     clearUI(false, true, false, true);
@@ -63,19 +56,13 @@ function App() {
   };
   return (
     <>
-      <AppContext.Provider value={{ currentNum, setCurrentNum }}>
-        <h1>{result}</h1>
+      <AppContext.Provider value={{ currentNum, setCurrentNum, prevNumber, setPrevNumber, currentOperator, setCurrentOperator, clearUI }}>
         <span>{prevNumber}</span>
         <span>{currentOperator}</span>
         <span>{currentNum} </span>
         <div className="wrapper">
           <NumberButtons />
-          <div className="container-operator">
-            <button onClick={() => handleOperator("+")}>+</button>
-            <button onClick={() => handleOperator("-")}>-</button>
-            <button onClick={() => handleOperator("*")}>*</button>
-            <button onClick={() => handleOperator("/")}>/</button>
-          </div>
+          <Operators />
         </div>
         <button onClick={clear}>Clear</button>
         <button onClick={calculate}>=</button>
