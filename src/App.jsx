@@ -1,22 +1,31 @@
-import { useState } from "react";
+import { useState, createContext } from "react";
 
 import "./App.css";
 import NumberButtons from "./Components/NumberButtons";
 
+export const AppContext = createContext();
 function App() {
+  const [currentNum, setCurrentNum] = useState("");
+
+  const clear = () => {
+    setCurrentNum(0);
+  };
   return (
     <>
-      <h1>012321</h1>
-      <div className="wrapper">
-        <NumberButtons />
-        <div className="container-operator">
-          <button>+</button>
-          <button>-</button>
-          <button>*</button>
-          <button>/</button>
+      <AppContext.Provider value={{ currentNum, setCurrentNum }}>
+        <h1>{currentNum}</h1>
+        <div className="wrapper">
+          <NumberButtons />
+          <div className="container-operator">
+            <button>+</button>
+            <button>-</button>
+            <button>*</button>
+            <button>/</button>
+          </div>
         </div>
-      </div>
-      <button>=</button>
+        <button>=</button>
+        <button onClick={clear}>Clear</button>
+      </AppContext.Provider>
     </>
   );
 }
