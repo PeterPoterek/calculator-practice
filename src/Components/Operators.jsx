@@ -6,6 +6,8 @@ const Operators = (props) => {
   const handleOperator = (operator) => {
     if (currentOperator === operator) return;
     if (currentNum === "") return;
+
+    if (currentNum !== "" && prevNumber !== "") return;
     setCurrentOperator(operator);
     setPrevNumber(currentNum);
 
